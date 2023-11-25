@@ -5,8 +5,8 @@
     <title>KadaiThymeleaf</title>
 </head>
 <body>
-    <h1>Thymeleaf課題</h1>
-    <h2>入力画面</h2>
+    <h1 th:text="#{content.h1}"></h1>
+    <h2 th:text="#{content.h2}"></h2>
     <p th:text="'入力された値は「' + ${val} + '」です。'"></p>
     <p><a th:href="@{/input/(previous=${param.val[0]})}">入力画面へ戻る</a></p>
 </body>
