@@ -1,0 +1,30 @@
+* {
+  margin:0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+body {
+  background-color: #f0f8ff;
+}
+#wrapper{
+  max-width: 1050px;
+  margin: 0 auto;
+  padding:2em;
+}
+#menu{
+  width: 200px;
+  float: right;
+  white-space: pre-wrap;
+  padding-left:1em;
+  padding-right:1em;
+  padding-bottom:1em;
+}
+#PC_only{
+  margin-right: 350px;
+  white-space: pre-wrap;
+  padding-left:1em;
+  padding-right:1em;
+  padding-bottom:1em;
+}
