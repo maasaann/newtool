@@ -24,7 +24,7 @@ import lombok.Data;
 public class Report {
 
     @Column(nullable = false)
-    private Integer employeeCode;
+    private String employeeCode;
 
     // ID
     @Id

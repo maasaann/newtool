@@ -19,6 +19,7 @@
     <div class="card-body mb-5">
     <div class="wizard wizard-success mb-4">
 
+        <!--
         <table class="table table-striped">
             <tr>
                 <th>日付</th>
@@ -48,7 +49,6 @@
                     th:text="${#temporals.format(report.updatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
             </tr>
         </table>
-
         <div class="mt-5 row g-1">
             <div class="col-auto">
                 <form name="form"
@@ -69,6 +69,7 @@
         </div>
 
         <span th:if="${deleteError} neq null" th:text="${deleteError}" class="text-danger"></span>
+        -->
     </div>
     </div>
     </div>

@@ -13,16 +13,16 @@
             <td width="55%">
                 <br>
                 <h3>①データ検索 機能</h3>
-                <form th:action="@{/reports/}" method="post" style="display: inline">
-                    <input type="text" placeholder="ここに社員番号を入力" name="empcode" th:value="${empcode}">
+                <form th:action="@{/search/}" method="post" style="display: inline">
+                    <input type="text" placeholder="アカウントID入力(例：1)" name="empcode" th:value="${empcode}">
                     <input type="submit" value="検索開始" class="btn btn-primary">
                 </form>
-                <a th:href="@{/reports/csv(empcode=${empcode})}" class="btn btn-primary">CSV出力</a>
+                <a th:href="@{/search/csv(empcode=${empcode})}" class="btn btn-primary">CSV出力</a>
             </td>
             <td width="45%">
                 <br>
                 <h3>②データCSV取込 機能</h3>
-                <form th:action="@{/reports/csv}" method="post" enctype="multipart/form-data">
+                <form th:action="@{/csv}" method="post" enctype="multipart/form-data">
                     <label for="file">CSVファイル： </label>
                     <input type="file" id="file" name="file" th:value="${file}" accept=".csv" required><br>
                     <button type="submit" class="btn btn-primary">取込実行</button>
@@ -32,7 +32,7 @@
         </tr>
     </table>
     
-    <br><a th:href="@{/reports/}" class="btn btn-primary">データ全件取得</a>
+    <br><a th:href="@{/all/}" class="btn btn-primary">データ全件取得</a>
     <span class="mb-3" th:text="'（ 現在の全データ数：' + ${listSize} + '件 ）'"></span><br>
 
     <div class="row">
@@ -42,20 +42,16 @@
         <table class="table table-striped w-100">
         <thead>
             <tr>
-                <th>レポートID</th>
-                <th>日付</th>
-                <th>タイトル</th>
-                <th></th>
+                <th>アカウントID</th>
+                <th>アカウント名</th>
+                <th>キーワード</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="report:${reportList}">
-                <td class="align-middle" th:text="${report.id}"></td>
-                <td class="align-middle" th:text="${report.reportDate}"></td>
-                <td class="align-middle text-break p-2" th:text="${report.title}"></td>
-                <td class="align-middle">
-                    <a th:href="@{/reports/{id}/(id=${report.id})}" class="btn btn-primary">詳細</a>
-                </td>
+                <td class="align-middle" th:text="${report.employeeCode}"></td>
+                <td class="align-middle" th:text="${report.title}"></td>
+                <td class="align-middle text-break p-2" th:text="${report.content}"></td>
             </tr>
         </tbody>
         </table>
