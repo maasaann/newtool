@@ -6,7 +6,8 @@
 
 <body><div id="wrapper">
     
-    <h1>＜LINEヤフーテックアカデミーで開発したJavaツール＞</h1>
+    <h3>＜<a href="https://ly-academy.yahoo.co.jp/tech/" target="_blank">LINEヤフーテックアカデミー</a>
+        で習得したJavaで作成した[KWmanager]と同等ツール＞</h3>
     
     <table>
         <tr>
@@ -14,10 +15,11 @@
                 <br>
                 <h3>①データ検索 機能</h3>
                 <form th:action="@{/search/}" method="post" style="display: inline">
-                    <input type="text" placeholder="アカウントID入力(例：1)" name="empcode" th:value="${empcode}">
+                    <input type="text" placeholder="ここにアカウントID入力" name="empcode" th:value="${empcode}">
                     <input type="submit" value="検索開始" class="btn btn-primary">
                 </form>
-                <a th:href="@{/search/csv(empcode=${empcode})}" class="btn btn-primary">CSV出力</a>
+                <a th:href="@{/search/csv(empcode=${empcode})}" class="btn btn-primary">CSV出力</a><br>
+                （アカウントID_100001_と_100002_が有効）
             </td>
             <td width="45%">
                 <br>
@@ -25,7 +27,8 @@
                 <form th:action="@{/csv}" method="post" enctype="multipart/form-data">
                     <label for="file">CSVファイル： </label>
                     <input type="file" id="file" name="file" th:value="${file}" accept=".csv" required><br>
-                    <button type="submit" class="btn btn-primary">取込実行</button>
+                    <button type="submit" class="btn btn-primary">取込実行</button><br>
+                    （取込追加用のファイルは<a href="https://excel3000.web.fc2.com/etc/AdditionalData.csv">こちら</a>）
                 </form>
                 <div th:if="${error}" style="color: red;">Error: <span th:text="${error}"></span></div>
             </td>
@@ -45,13 +48,15 @@
                 <th>アカウントID</th>
                 <th>アカウント名</th>
                 <th>キーワード</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="report:${reportList}">
-                <td class="align-middle" th:text="${report.employeeCode}"></td>
-                <td class="align-middle" th:text="${report.title}"></td>
-                <td class="align-middle text-break p-2" th:text="${report.content}"></td>
+                <td th:text="${report.employeeCode}" width="20%"></td>
+                <td th:text="${report.title}" width="30%"></td>
+                <td th:text="${report.content}" width="50%"></td>
+                <td></td>
             </tr>
         </tbody>
         </table>
