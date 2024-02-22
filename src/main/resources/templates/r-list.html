@@ -49,7 +49,8 @@
                 <th>アカウントID</th>
                 <th>アカウント名</th>
                 <th>キーワード</th>
-                <th>更新日時</th>
+                <th>登録日時</th>
+                <th>最終更新日時</th>
                 <th></th>
             </tr>
         </thead>
@@ -58,16 +59,19 @@
                 <td th:text="${report.employeeCode}"></td>
                 <td th:text="${report.title}"></td>
                 <td th:text="${report.content}"></td>
-                <td th:text="${report.updatedAt}"></td>
+                <td th:text="${#temporals.format(report.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+                <td th:text="${#temporals.format(report.updatedAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
                 <td><a th:href="@{/r-detail/{id}/(id=${report.id})}" class="btn btn-primary">編集</a></td>
             </tr>
         </tbody>
         </table>
 
 <center>
-<a th:href="@{/{page}/(page=${1})}">1</a>
-<a th:href="@{/{page}/(page=${2})}">2</a>
-<a th:href="@{/{page}/(page=${3})}">3</a>
+<th:block th:if="${listSize} >  0"><a th:href="@{/{page}/(page=${1})}">1</a></th:block>
+<th:block th:if="${listSize} >  5"><a th:href="@{/{page}/(page=${2})}">2</a></th:block>
+<th:block th:if="${listSize} > 10"><a th:href="@{/{page}/(page=${3})}">3</a></th:block>
+<th:block th:if="${listSize} > 15"><a th:href="@{/{page}/(page=${3})}">4</a></th:block>
+<th:block th:if="${listSize} > 20"><a th:href="@{/{page}/(page=${3})}">5</a></th:block>
 </center>
 
     </div>

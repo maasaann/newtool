@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,25 +50,82 @@ public class ReportController {
     // 初期の空画面
     @GetMapping
     public String getList1(Model model) {
-        model.addAttribute("listSize", 0);
+
+        int allDataCount = reportService.findAll().size();
+
+        model.addAttribute("listSize", allDataCount);
+
+        List<Report> reportList = reportService.findAll();
+
+        int start =   0;
+        int end   =   5;
+
+        if ( allDataCount <= end ) {
+             end = allDataCount;
+        }
+
+        List<Report> pagedItems = reportList.subList(start, end);
+
+        model.addAttribute("reportList", pagedItems);
+
         return "r-list";
     }
 
     // 詳細画面
     @GetMapping(value = "/r-detail/{id}/")
     public String detail(@PathVariable String id,Model model) {
-
+        
         model.addAttribute("report", reportService.findByCode(id));
-
+        
         return "r-detail";
+    }
+
+    // 更新実行
+    @PostMapping(value = "/r-detail/{id}/update")
+    public String update(
+            @PathVariable String id,Report report,Model model) {
+        
+        model.addAttribute("report", reportService.update(id, report));
+
+        model.addAttribute("listSize", reportService.findAll().size());
+        model.addAttribute("reportList", reportService.findAll());
+        
+        return "r-list";
+    }
+
+    // 削除
+    @GetMapping(value = "/delete/{id}/")
+    public String delete(
+            @PathVariable String id,Report report,Model model) {
+        
+        model.addAttribute("report", reportService.delete(id, report));
+
+        model.addAttribute("listSize", reportService.findAll().size());
+        model.addAttribute("reportList", reportService.findAll());
+        
+        return "r-list";
     }
 
     // 全件取得
     @GetMapping(value = "/all/")
     public String getList2(Model model) {
 
-        model.addAttribute("listSize", reportService.findAll().size());
-        model.addAttribute("reportList", reportService.findAll());
+        int allDataCount = reportService.findAll().size();
+
+        model.addAttribute("listSize", allDataCount);
+
+        List<Report> reportList = reportService.findAll();
+
+        int start =   0;
+        int end   =   5;
+
+        if ( allDataCount <= end ) {
+             end = allDataCount;
+        }
+
+        List<Report> pagedItems = reportList.subList(start, end);
+
+        model.addAttribute("reportList", pagedItems);
 
         return "r-list";
     }
