@@ -1,7 +1,13 @@
-INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)
-     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名AAA","（初期分）キーワード1",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)
-     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名BBB","（初期分）キーワード2",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
-INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)
-     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名CCC","（初期分）キーワード3",100002,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名AAA","（初期分）キーワード01",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名BBB","（初期分）キーワード02",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名CCC","（初期分）キーワード03",100002,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名DDD","（初期分）キーワード04",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名EEE","（初期分）キーワード05",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名FFF","（初期分）キーワード06",100002,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名GGG","（初期分）キーワード07",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名HHH","（初期分）キーワード08",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名III","（初期分）キーワード09",100002,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名JJJ","（初期分）キーワード10",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名KKK","（初期分）キーワード11",100001,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+INSERT INTO daily_report_system.reports(report_date,title,content,employee_code,delete_flg,created_at,updated_at)     VALUES (CURRENT_TIMESTAMP,"(初期分)アカウント名LLL","（初期分）キーワード12",100002,0,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
 ;

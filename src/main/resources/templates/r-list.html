@@ -5,10 +5,10 @@
 <link rel="stylesheet" th:href="@{/css/set.css}">
 
 <body><div id="wrapper">
-    
+
     <h3>＜<a href="https://ly-academy.yahoo.co.jp/tech/" target="_blank">LINEヤフーテックアカデミー</a>
         で習得したJavaで作成した[KWmanager]と同等ツール＞</h3>
-    
+
     <table>
         <tr>
             <td width="55%">
@@ -34,9 +34,10 @@
             </td>
         </tr>
     </table>
-    
+
     <br><a th:href="@{/all/}" class="btn btn-primary">データ全件取得</a>
-    <span class="mb-3" th:text="'（ 現在の全データ数：' + ${listSize} + '件 ）'"></span><br>
+    <span class="mb-3" th:text="'（ 現在の全データ数：' + ${listSize} + '件 ）'"></span>
+    （ アカウントIDで <a th:href="@{/asc/}">昇順</a> / <a th:href="@{/desc/}">降順</a> ）<br>
 
     <div class="row">
     <div class="col-xl-11">
@@ -48,18 +49,27 @@
                 <th>アカウントID</th>
                 <th>アカウント名</th>
                 <th>キーワード</th>
+                <th>更新日時</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="report:${reportList}">
-                <td th:text="${report.employeeCode}" width="20%"></td>
-                <td th:text="${report.title}" width="30%"></td>
-                <td th:text="${report.content}" width="50%"></td>
-                <td></td>
+                <td th:text="${report.employeeCode}"></td>
+                <td th:text="${report.title}"></td>
+                <td th:text="${report.content}"></td>
+                <td th:text="${report.updatedAt}"></td>
+                <td><a th:href="@{/r-detail/{id}/(id=${report.id})}" class="btn btn-primary">編集</a></td>
             </tr>
         </tbody>
         </table>
+
+<center>
+<a th:href="@{/{page}/(page=${1})}">1</a>
+<a th:href="@{/{page}/(page=${2})}">2</a>
+<a th:href="@{/{page}/(page=${3})}">3</a>
+</center>
+
     </div>
     </div>
     </div>

@@ -11,7 +11,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,12 +53,81 @@ public class ReportController {
         return "r-list";
     }
 
+    // 詳細画面
+    @GetMapping(value = "/r-detail/{id}/")
+    public String detail(@PathVariable String id,Model model) {
+
+        model.addAttribute("report", reportService.findByCode(id));
+
+        return "r-detail";
+    }
+
     // 全件取得
     @GetMapping(value = "/all/")
     public String getList2(Model model) {
 
         model.addAttribute("listSize", reportService.findAll().size());
         model.addAttribute("reportList", reportService.findAll());
+
+        return "r-list";
+    }
+
+    // ページング
+    @GetMapping(value = "/{page}/")
+    public String getListPage(@PathVariable("page") Integer page, Model model) {
+
+        int allDataCount = reportService.findAll().size();
+
+        model.addAttribute("listSize", allDataCount);
+
+        List<Report> reportList = reportService.findAll();
+
+        int start = ( 5 * page ) - 5;
+        int end   =   5 * page;
+
+        if ( allDataCount <= end ) {
+             end = allDataCount;
+        }
+
+        List<Report> pagedItems = reportList.subList(start, end);
+
+        model.addAttribute("reportList", pagedItems);
+
+        return "r-list";
+    }
+
+    // 昇順処理
+    @GetMapping(value = "/asc/")
+    public String orderByAsc(Model model) {
+
+        // 全データ数
+        int allDataCount = reportService.findAll().size();
+        model.addAttribute("listSize", allDataCount);
+
+        // 昇順処理
+        List<Report> reportList = reportService.findAll();
+        Comparator<Report> asc = Comparator.comparing(Report::getEmployeeCode);
+        List<Report> ascList = reportList.stream().sorted(asc).collect(Collectors.toList());
+
+        model.addAttribute("reportList", ascList);
+
+        return "r-list";
+    }
+
+    // 降順処理処理
+    @GetMapping(value = "/desc/")
+    public String orderByDesc(Model model) {
+
+        // 全データ数
+        int allDataCount = reportService.findAll().size();
+        model.addAttribute("listSize", allDataCount);
+
+        // 昇順処理
+        List<Report> reportList = reportService.findAll();
+        Comparator<Report> desc = Comparator.comparing(Report::getEmployeeCode).reversed();
+        List<Report> descList = reportList.stream().sorted(desc).collect(Collectors.toList());
+
+        model.addAttribute("reportList", descList);
 
         return "r-list";
     }
@@ -155,16 +226,15 @@ public class ReportController {
                 Integer ReportCounts = reportService.findAll().size() + 1;
                 report.setId(ReportCounts); // id
 
-                //report.setEmployee(null).setName();
                 LocalDate RD = LocalDate.parse(data[1]);
                 report.setReportDate(RD); // レポート日時
                 report.setTitle(data[2]); // タイトル
                 report.setContent(data[3]); // 内容
 
-                report.setDeleteFlg(false);
+                report.setDeleteFlg(false); // deleteFlag
                 LocalDateTime now = LocalDateTime.now();
-                report.setCreatedAt(now);
-                report.setUpdatedAt(now);
+                report.setCreatedAt(now); // CreatedAt
+                report.setUpdatedAt(now); // UpdatedAt
 
                 reportRepository.save(report);
             }
@@ -172,8 +242,8 @@ public class ReportController {
         } catch (IOException e) {
             return "redirect:/";
         }
+
         return "redirect:/all/";
     }
-    
-    
+
 }
