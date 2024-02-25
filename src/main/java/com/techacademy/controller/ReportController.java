@@ -52,13 +52,17 @@ public class ReportController {
             @RequestParam(required = false) String order,
             Model model) throws Exception {
 
-        // 表示データ取得
+        // 全データ 取得
         List<Report> reportList = reportService.findAll();
 
-        // 全データ数 数える
+        // 全データ 数える
         int allDataCount = reportList.size();
         model.addAttribute("listSize", allDataCount);
 
+        // 現在のページ ＝ 遷移先ページ数 格納
+        model.addAttribute("activePage", page);
+        
+        // page情報から start位置 と end位置 を確定
         int start = ( 5 * page ) - 5;
         int end   =   5 * page;
         if ( allDataCount <= end ) { end = allDataCount; }
@@ -84,6 +88,9 @@ public class ReportController {
 
             model.addAttribute("reportList", pagedItems);
         }
+        
+        // order情報格納
+        model.addAttribute("order", order);
 
         // ページング情報格納
         int startPage = 1;
@@ -92,11 +99,6 @@ public class ReportController {
 
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-
-        // 遷移先ページ数取得
-        model.addAttribute("activePage", page);
-
-        model.addAttribute("order", order);
 
         return "r-list";
     }
@@ -185,73 +187,6 @@ public class ReportController {
     public String getAllList(Model model) {
 
         return "redirect:/";
-    }
-
-    // 昇順処理
-    @GetMapping(value = "/asc/")
-    public String orderByAsc(
-            @RequestParam(required = false, defaultValue = "1") Integer page,
-            @RequestParam(required = false) String order,
-            Model model) {
-
-        // 全データ取得
-        List<Report> reportList = reportService.findAll();
-
-        // 全データ数
-        int allDataCount = reportList.size();
-        model.addAttribute("listSize", allDataCount);
-
-        int start = ( 5 * page ) - 5;
-        int end   =   5 * page;
-        if ( allDataCount <= end ) { end = allDataCount; }
-
-        // ここで昇順処理
-        Comparator<Report> asc = Comparator.comparing(Report::getEmployeeCode);
-        List<Report> ascList = reportList.stream().sorted(asc).collect(Collectors.toList());
-
-        // 1ページ目のみを格納
-        List<Report> pagedItems = ascList.subList(start, end);
-        model.addAttribute("reportList", pagedItems);
-
-        // ページング情報格納
-        int startPage = 1;
-        int endPage   = ( allDataCount / 5 ) + 1;
-        if ( allDataCount <= endPage ) { endPage = allDataCount; }
-
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-
-        model.addAttribute("activePage", 1);
-
-        return "r-list";
-    }
-
-    // 降順処理処理
-    @GetMapping(value = "/desc/")
-    public String orderByDesc(Model model) {
-
-        // 全データ数
-        int allDataCount = reportService.findAll().size();
-        model.addAttribute("listSize", allDataCount);
-
-        // 昇順処理
-        List<Report> reportList = reportService.findAll();
-        Comparator<Report> desc = Comparator.comparing(Report::getEmployeeCode).reversed();
-        List<Report> descList = reportList.stream().sorted(desc).collect(Collectors.toList());
-
-        model.addAttribute("reportList", descList);
-
-        // ページング情報格納
-        int startPage = 1;
-        int endPage   = ( allDataCount / 5 ) + 1;
-        if ( allDataCount <= endPage ) { endPage = allDataCount; }
-
-        model.addAttribute("startPage", startPage);
-        model.addAttribute("endPage", endPage);
-
-        model.addAttribute("activePage", 1);
-
-        return "r-list";
     }
 
     // CSVファイルを出力
@@ -348,8 +283,6 @@ public class ReportController {
         } catch (IOException e) {
             return "redirect:/";
         }
-
         return "redirect:/";
     }
-
 }
