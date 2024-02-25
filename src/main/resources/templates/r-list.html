@@ -19,7 +19,7 @@
                     <input type="submit" value="検索開始" class="btn btn-primary">
                 </form>
                 <a th:href="@{/search/csv(empcode=${empcode})}" class="btn btn-primary">CSV出力</a><br>
-                （アカウントID_100001_と_100002_が有効）
+                （アカウントID 100001 などと入力）
             </td>
             <td width="45%">
                 <br>
@@ -37,7 +37,7 @@
 
     <br><a th:href="@{/all/}" class="btn btn-primary">データ全件取得</a>
     <span class="mb-3" th:text="'（ 現在の全データ数：' + ${listSize} + '件 ）'"></span>
-    （ アカウントIDで <a th:href="@{/(order=asc)}">昇順</a> / 
+    （ アカウントIDで <a th:href="@{/(order=asc)}">昇順</a> /
                <a th:href="@{/(order=desc)}">降順</a> ）<br>
 
     <div class="row">
