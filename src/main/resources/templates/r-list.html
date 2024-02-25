@@ -37,7 +37,8 @@
 
     <br><a th:href="@{/all/}" class="btn btn-primary">データ全件取得</a>
     <span class="mb-3" th:text="'（ 現在の全データ数：' + ${listSize} + '件 ）'"></span>
-    （ アカウントIDで <a th:href="@{/asc/}">昇順</a> / <a th:href="@{/desc/}">降順</a> ）<br>
+    （ アカウントIDで <a th:href="@{/(order=asc)}">昇順</a> / 
+               <a th:href="@{/(order=desc)}">降順</a> ）<br>
 
     <div class="row">
     <div class="col-xl-11">
@@ -66,17 +67,20 @@
         </tbody>
         </table>
 
-<center>
-<th:block th:if="${listSize} >  0"><a th:href="@{/{page}/(page=${1})}">1</a></th:block>
-<th:block th:if="${listSize} >  5"><a th:href="@{/{page}/(page=${2})}">2</a></th:block>
-<th:block th:if="${listSize} > 10"><a th:href="@{/{page}/(page=${3})}">3</a></th:block>
-<th:block th:if="${listSize} > 15"><a th:href="@{/{page}/(page=${3})}">4</a></th:block>
-<th:block th:if="${listSize} > 20"><a th:href="@{/{page}/(page=${3})}">5</a></th:block>
-</center>
+    <center style="font-size: 18pt;">
+      <p th:each="i : ${#numbers.sequence(startPage, endPage)}" style="display: inline">
+           <a th:if="@{${i} != ${activePage}}" th:text="@{${activePage} != null}? ${i} : ''" th:href="@{'/?order=' + ${order} + '&page=' + ${i}}"></a>
+        <span th:if="@{${i} == ${activePage}}" th:text="@{${activePage} != null}? ${i} : ''"></span>
+
+           <a th:if="@{${i} != ${acPage}}" th:text="@{${acPage} != null}? ${i} : ''" th:href="@{'/search/?page=' + ${i} + '&empcode=' + ${empcode}}"></a>
+        <span th:if="@{${i} == ${acPage}}" th:text="@{${acPage} != null}? ${i} : ''"></span>
+      </p>
+    </center>
 
     </div>
     </div>
     </div>
     </div>
-</div></body>
+    </div>
+</body>
 </html>
