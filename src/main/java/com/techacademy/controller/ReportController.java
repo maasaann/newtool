@@ -67,30 +67,30 @@ public class ReportController {
         int end   =   5 * page;
         if ( allDataCount <= end ) { end = allDataCount; }
 
+        // order情報格納
+        model.addAttribute("order", order);
+
         // 昇順 or 降順 or null
-               if( "asc".equals(order) ) {
+               if( "asc".equals(order) ) { // 昇順
 
             Comparator<Report> asc = Comparator.comparing(Report::getEmployeeCode);
             List<Report> pagedItems = reportList.stream().sorted(asc).collect(Collectors.toList()).subList(start, end);
 
             model.addAttribute("reportList", pagedItems);
 
-        } else if( "desc".equals(order) ) {
+        } else if( "desc".equals(order) ) { // 降順
 
             Comparator<Report> desc = Comparator.comparing(Report::getEmployeeCode).reversed();
             List<Report> pagedItems = reportList.stream().sorted(desc).collect(Collectors.toList()).subList(start, end);
 
             model.addAttribute("reportList", pagedItems);
 
-        } else {
+        } else { // null
 
             List<Report> pagedItems = reportList.subList(start, end);
 
             model.addAttribute("reportList", pagedItems);
         }
-
-        // order情報格納
-        model.addAttribute("order", order);
 
         // ページング情報格納
         int startPage = 1;
@@ -103,7 +103,7 @@ public class ReportController {
         return "r-list";
     }
 
-    // アカウントIDから一覧取得
+    // アカウントIDから一覧取得(post)
     @PostMapping(value = "/search/" )
     public String getByCode(
             @RequestParam(required = false, defaultValue = "1") Integer page,
@@ -119,6 +119,10 @@ public class ReportController {
         // 検索結果 データ数 数える
         int dataCount = reportList.size();
 
+        // 現在のページ ＝ 遷移先ページ数 格納
+        model.addAttribute("acPage", page);
+
+        // page情報から start位置 と end位置 を確定
         int start = ( 5 * page ) - 5;
         int end   =   5 * page;
         if ( dataCount <= end ) { end = dataCount; }
@@ -137,13 +141,10 @@ public class ReportController {
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
 
-        // 遷移先ページ数取得
-        model.addAttribute("acPage", page);
-
         return "r-list";
     }
 
-    // アカウントID絞込時 ページング
+    // アカウントID絞込時 ページング(get)
     @GetMapping(value = "/search/" )
     public String getByCode2(
             @RequestParam(required = false, defaultValue = "1") Integer page,
