@@ -251,15 +251,15 @@ public class ReportController {
 
                 String[] data = lines.get(i).split(",");
 
-                System.out.println("next");
-                System.out.print(data[0] + ",");
-                System.out.print(data[1] + ",");
-                System.out.print(data[2] + ",");
-                System.out.print(data[3] + ",");
-                System.out.print(data[4] + ",");
-                System.out.print(data[5] + ",");
-                System.out.print(data[6] + ",");
-                System.out.print(data[7] + ",");
+//                System.out.println("next");
+//                System.out.print(data[0] + ",");
+//                System.out.print(data[1] + ",");
+//                System.out.print(data[2] + ",");
+//                System.out.print(data[3] + ",");
+//                System.out.print(data[4] + ",");
+//                System.out.print(data[5] + ",");
+//                System.out.print(data[6] + ",");
+//                System.out.print(data[7] + ",");
 
                 String empCode = data[4];
                 report.setEmployeeCode(empCode); // empCode
