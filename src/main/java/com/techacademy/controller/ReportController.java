@@ -61,7 +61,7 @@ public class ReportController {
 
         // 現在のページ ＝ 遷移先ページ数 格納
         model.addAttribute("activePage", page);
-        
+
         // page情報から start位置 と end位置 を確定
         int start = ( 5 * page ) - 5;
         int end   =   5 * page;
@@ -88,13 +88,13 @@ public class ReportController {
 
             model.addAttribute("reportList", pagedItems);
         }
-        
+
         // order情報格納
         model.addAttribute("order", order);
 
         // ページング情報格納
         int startPage = 1;
-        int endPage   = ( allDataCount / 5 ) + 1;
+        int endPage   = ( allDataCount + 5 - 1) / 5;
         if ( allDataCount <= endPage ) { endPage = allDataCount; }
 
         model.addAttribute("startPage", startPage);
@@ -131,7 +131,7 @@ public class ReportController {
 
         // ページング情報格納
         int startPage = 1;
-        int endPage   = ( dataCount / 5 ) + 1;
+        int endPage   = ( dataCount + 5 - 1) / 5;
         if ( dataCount <= endPage ) { endPage = dataCount; }
 
         model.addAttribute("startPage", startPage);
