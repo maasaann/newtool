@@ -67,9 +67,11 @@
         </tbody>
         </table>
 
-    <center style="font-size: 13pt;">
+    <center style="font-size: 14pt;">
       <a th:if="${activePage != null}" th:text="${activePage - 1 >= startPage}? '前のページ' : ''" th:href="@{'/?order=' + ${order} + '&page=' + ${activePage - 1}}"></a>
+
       <a th:if="${acPage != null}" th:text="${acPage - 1 >= startPage}? '前のページ' : ''" th:href="@{'/search/?page=' + ${acPage - 1} + '&empcode=' + ${empcode}}"></a>
+   <span th:if="${acPage == 1 or activePage == 1}" th:text="前のページ"></span>
           
           <p th:each="i : ${#numbers.sequence(startPage, endPage)}" style="display: inline">
           
@@ -82,7 +84,9 @@
           </p>
           
       <a th:if="${activePage != null}" th:text="${activePage + 1 <= endPage  }? '次のページ' : ''" th:href="@{'/?order=' + ${order} + '&page=' + ${activePage + 1}}"></a>
+
       <a th:if="${acPage != null}" th:text="${acPage + 1 <= endPage  }? '次のページ' : ''" th:href="@{'/search/?page=' + ${acPage + 1} + '&empcode=' + ${empcode}}"></a>
+   <span th:if="${acPage == endPage or activePage == endPage}" th:text="次のページ"></span>
     </center>
 
     </div>

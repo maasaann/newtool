@@ -173,9 +173,19 @@ public class ReportController {
         return "redirect:/";
     }
 
-    // 削除
+    // 削除 確認画面
+    @GetMapping(value = "/delete-comfirm/{id}/")
+    public String delete1(
+            @PathVariable String id,Report report,Model model) {
+
+        model.addAttribute("report", reportService.findByCode(id));
+
+        return "delete";
+    }
+
+    // 削除 実行
     @GetMapping(value = "/delete/{id}/")
-    public String delete(
+    public String delete2(
             @PathVariable String id,Report report,Model model) {
 
         model.addAttribute("report", reportService.delete(id, report));
